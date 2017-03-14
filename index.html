@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>WebAssembly - Windows Installation</title>
+		<link rel="stylesheet" href="./bulma.css">
+	</head>
+	<body>
+		<div class="hero is-fullheight is-primary">
+			<div class="hero-body">
+				<div class="container has-text-centered">
+					<div class="title is-1">WebAssembly</div>
+					<div class="subtitle is-3">Setting up for Windows</div>
+				</div>
+			</div>
+		</div><br><br>
+		<div class="container">
+			<div class="content is-medium">
+				<p>
+					WebAssembly, which you probably know what exactly is, is almost on the verge of public release. It's a new technology with taking a step backward to push the performance further. That's best I could explain it. Anyways, let's not waste time and take a look at what the blog title really means to say.
+				</p>
+				<p>
+					I have been using WebAssembly for quite a while now and if you have been following latest web trends, you might have tried this already. The problem is that on Windows, which I consider as new emerging platform for developers with the introduction of Bash on Ubuntu on Windows.
+				</p>
+				<div class="notification is-warning">
+					Most of the instructions are provided <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_wasm">here</a> but they are quite unclear. Windows installation does not go the way it is supposed to go. It is pain in ass to sit through a ton of errors. So here we go.
+				</div>
+				<p>
+					Let's start by installing a couple of tools required to compile our WebAssembly code.
+					<ol>
+						<li><a href="https://www.visualstudio.com/downloads/">Visual Studio Community Edition</a></li>
+						<li><a href="https://www.python.org/downloads/">Python 2.7</a> (That's what I recommend)</li>
+						<li><a href="https://cmake.org/download/">CMake</a></li>
+						<li><a href="https://git-scm.com">Git</a>(I am really sorry but you are not a developer if you don't have this installed)</li>
+						<li>Brain - Sorry</li>
+					</ol>
+				</p>
+				<p>
+					Let's start first with setting up our Visual Studio Community Edition. This might take a couple of minutes to a couple of hours depending upon your internet speed. <br>
+					Once you have got through complete installation process, you will realise that VS has not installed C compiler on your system. This can be installed by firing up Visual Studio, go under New Project option -> Visual C++ -> Install C++ support(or something similar to that). You are going to see that it asks you to install it and all you have to do is just go with it. It will take an hour or less to install. Install everything prompted on that screen including Windows 8 SDK so that you will not be in any trouble later on.
+				</p>
+				<p>
+					Previous part must have consumed a lot of your time if you didn't already have Visual Studio installed. Moving on, we have Python. Install it the way you always do.
+				</p>
+				<div class="message is-warning">
+					<div class="message-header"><p>pywin32</p></div>
+					<div class="message-body">
+						This time you have to make sure you install one more thing in certain cases. It is quite good if you go ahead and take some time to download and install <a href="https://sourceforge.net/projects/pywin32/files/pywin32/">pywin32</a>. This library is only a couple of KB large. I hope you don't have shittiest internet which cannot download this file real quick. Install it as directed and move on to next step.
+					</div>
+				</div>
+				<p>
+					CMake installation is something that you can do by your own. You don't wanna mess up with anything until told or you are a expert developer.
+				</p>
+				<div class="subtitle is-3">Let's start Building</div>
+				<p>
+					In order to start the build process, run following commands through CMD or powershell(recommended).
+					<pre>
+	git clone https://github.com/juj/emsdk.git
+	cd emsdk
+
+	emsdk install --build=Release sdk-incoming-64bit binaryen-master-64bit
+	emsdk activate --build=Release sdk-incoming-64bit binaryen-master-64bit</pre>
+					This part will take a lot of time. 9 hours in my case of shitty internet.
+					After you run these commands, run <code>emsdk_env.bat</code>. Set these variables in your PATH variable.
+				</p>
+				<div class="message is-danger">
+					<div class="message-header"><p>In case of Binaryen errors:</p></div>
+					<div class="message-body">
+						You might get certain errors in this section. Try to remove Binaryen from the command in that case to minimize errors. Don't worry, as it is core of WebAssembly, we will be installing it later. (or right now)
+						<p>
+							In case you cannot install Binaryen, which is actually supposed to be a build process, follow these steps.
+							<ol>
+								<li>Clone the git directory with following command: <code>git clone https://github.com/WebAssembly/binaryen.git</code>.</li>
+								<li>Once completed, fire up MSBuild Command Prompt for VS20XX.</li>
+								<li>Navigate to binaryen files.</li>
+								<li>Run <code>cmake .</code> (Include `.`)</li>
+								<li>Run <code>make</code></li>
+							</ol>
+						</p>
+					</div>
+				</div>
+				<p>
+					Now that we have cleared everything out of the way, just one final piece and heart of WebAssembly transcompiler is reamining. It is Emscripten. Let's start by going to their <a href="https://kripken.github.io/emscripten-site/index.html">website</a> or directly to <a href="https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html">download page</a>.
+				</p>
+				<p>
+					Download a version that is for Windows and install it on your system. Let's go from there.
+				</p>
+				<div class="notification is-success">
+					This is final part. You can follow next instructions from <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_wasm#Compiling_an_example">here</a>. It is really late at night. I should go to sleep now.
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
